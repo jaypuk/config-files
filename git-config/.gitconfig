@@ -2,7 +2,7 @@
 	recentrepo = C:/Git/4BIM
 [user]
 	name = Jayesh Patel
-	email = jayesh.patel@4projects.com
+	email = jayesh.patel@viewpoint.com
 [core]
 	autocrlf = true
 	editor = 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
@@ -17,6 +17,7 @@
     # list all aliases
 	alias = !git config -l | grep alias | cut -c 7-
 	diffbranch = !git diff --name-status $1..$2
+    graphviz = "!f() { echo 'digraph git {' ; git --no-pager log --pretty='format:  \"%h\"[label=\"%h\\n%s\"];' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 [credential]
 	helper = !'C:\\Users\\jayesh.patel\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
 [diff]
@@ -40,7 +41,7 @@
 	cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' -merge -result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 	trustExitCode = true
 [push]
-	default = matching
+	default = simple
 [color]
 [color "interactive"]
 	prompt = yellow

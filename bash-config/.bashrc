@@ -1,3 +1,7 @@
+#https://twitter.com/michaelhoffman/status/639178145673932800
+HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+
+
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
 alias ll='ls -laFL'
@@ -30,8 +34,8 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 #alias gll='git --no-pager log --pretty=format:"%C(bold cyan)%h%C(bold yellow)%d - %Creset%s %C(bold green)(%cr)%Creset %C(bold magenta)<%cn>" --decorate --numstat -n 3'
 
 
-alias dragon='/c/tools/gitscc/dragon.exe /c/git/4bim &'
-
+#alias dragon='/c/tools/gitscc/dragon.exe /c/git/4bim &'
+alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Tier2Tier &'
 alias cls='clear'
 
 alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
@@ -39,4 +43,18 @@ alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
 alias gd='git difftool'
 alias gds='git difftool --staged'
 export PATH=$PATH:~/.local/bin/
-alias goto=". goto"
+
+alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
+
+#
+#http://www.subfocal.net/post/44278880990/stupid-bash-tricks-show-git-branch-in-your-window
+#function git-title {
+#   local title
+#    if ! title="branch: `git rev-parse --abbrev-ref HEAD 2>/dev/null`"; then
+#        # Not a git repository
+#        title="`pwd`"
+#    fi
+#    echo -ne "\033]2;$title\007"
+#}
+#export PROMPT_COMMAND="git-title"
+#
