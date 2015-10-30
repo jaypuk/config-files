@@ -58,3 +58,5 @@ alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
 #}
 #export PROMPT_COMMAND="git-title"
 #
+
+alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
