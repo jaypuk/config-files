@@ -20,9 +20,9 @@
 [credential]
 	helper = !'C:\\Users\\jayesh.patel\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
 [diff]
-    tool = diffmerge
+	tool = bc3
 [merge]
-    tool = diffmerge
+	tool = bc3
 [difftool "diffmerge"]
     cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' "\"$LOCAL\"" "\"$REMOTE\""
 [mergetool "diffmerge"]
@@ -51,3 +51,7 @@
     new = green bold
     frag = magenta bold
     whitespace = white bold reverse
+[difftool "bc3"]
+	path = c:/Program Files (x86)/Beyond Compare 3/bcomp.exe
+[mergetool "bc3"]
+	path = c:/Program Files (x86)/Beyond Compare 3/bcomp.exe
