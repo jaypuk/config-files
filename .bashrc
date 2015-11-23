@@ -35,7 +35,7 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 
 
 #alias dragon='/c/tools/gitscc/dragon.exe /c/git/4bim &'
-alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Tier2Tier &'
+alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
 alias cls='clear'
 
 alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
@@ -60,3 +60,5 @@ alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
 #
 
 alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
+
+alias prune='git remote prune origin'
