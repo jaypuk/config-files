@@ -52,6 +52,6 @@
     frag = magenta bold
     whitespace = white bold reverse
 [difftool "bc3"]
-	path = c:/Program Files (x86)/Beyond Compare 3/bcomp.exe
+	path = c:/Program Files (x86)/Beyond Compare 3/bcompare.exe
 [mergetool "bc3"]
-	path = c:/Program Files (x86)/Beyond Compare 3/bcomp.exe
+	path = c:/Program Files (x86)/Beyond Compare 3/bcompare.exe

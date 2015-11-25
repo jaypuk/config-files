@@ -11,7 +11,8 @@ alias gc='git checkout'
 
 # from http://stackoverflow.com/a/16710084
 # ascii colours http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-function gb() {
+# Git Branch with Description
+function gbd() {
   branches=$(git for-each-ref --format='%(refname)' refs/heads/ | sed 's|refs/heads/||')
   for branch in $branches; do
     desc=$(git config branch.$branch.description)
@@ -40,8 +41,8 @@ alias cls='clear'
 
 alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
 
-alias gd='git difftool'
-alias gds='git difftool --staged'
+alias gd='git difftool --dir-diff'
+alias gds='git difftool --staged --dir-diff'
 export PATH=$PATH:~/.local/bin/
 
 alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
@@ -62,3 +63,5 @@ alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
 alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
 alias prune='git remote prune origin'
+
+alias gb='git branch -v'
