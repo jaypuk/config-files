@@ -1,6 +1,9 @@
 #https://twitter.com/michaelhoffman/status/639178145673932800
 HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
 
+get_hash() {
+    git rev-parse --short HEAD 2>/dev/null
+}
 
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
@@ -29,7 +32,7 @@ function gbd() {
 # from https://coderwall.com/p/euwpig
 # see http://stackoverflow.com/a/15458378 for colour opts
 alias gl='git --no-pager log --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" --abbrev-commit --graph -n 20'
-alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" -n 20'
+alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" -n 15'
 
 # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
 #alias gll='git --no-pager log --pretty=format:"%C(bold cyan)%h%C(bold yellow)%d - %Creset%s %C(bold green)(%cr)%Creset %C(bold magenta)<%cn>" --decorate --numstat -n 3'
@@ -65,3 +68,5 @@ alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 alias prune='git remote prune origin'
 
 alias gb='git branch -v'
+
+alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
