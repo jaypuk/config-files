@@ -70,7 +70,7 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
 alias cls='clear'
 
-alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
+#alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
 
 alias gd='git difftool --dir-diff'
 alias gds='git difftool --staged --dir-diff'
@@ -96,5 +96,6 @@ alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 alias prune='git remote prune origin'
 
 alias gb='git branch -v'
-
+alias gbr='git branch -r'
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
+alias gf='git fetch'
