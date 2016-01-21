@@ -100,4 +100,4 @@ alias gbr='git branch -r'
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
 
-alias db='grep --color "name=\"DB:" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
+alias db='grep --color -H "name=\"DB:" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
