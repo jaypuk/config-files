@@ -95,7 +95,9 @@ alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
 alias prune='git remote prune origin'
 
-alias gb='git branch -v'
+alias gb='git branch -vv'
 alias gbr='git branch -r'
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
+
+alias db='grep --color "name=\"DB:" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
