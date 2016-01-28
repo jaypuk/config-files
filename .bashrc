@@ -101,3 +101,6 @@ alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git s
 alias gf='git fetch'
 
 alias db='grep --color -H "Initial Catalog=[^;]*;" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
+alias fixdb="echo --Before-- && db && sed 's/Initial Catalog=[^;]*;/Initial Catalog=4Projects_3G_T2T;/g' Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config > web.config.tmp && mv web.config.tmp Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config && echo --After-- && db"
+
+alias bc="'c:/Program Files (x86)/Beyond Compare 3/bcompare.exe'"
