@@ -55,3 +55,8 @@
 	path = c:/Program Files (x86)/Beyond Compare 3/bcompare.exe
 [mergetool "bc3"]
 	path = c:/Program Files (x86)/Beyond Compare 3/bcompare.exe
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+	remote = green

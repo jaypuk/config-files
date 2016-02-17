@@ -70,7 +70,7 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
 alias cls='clear'
 
-#alias stageAllButConfig='git add --all && git reset -- *Web.config && gs'
+alias stageAllButConfig='git add --all && git reset -- "Hexagon3.5 Optimized/ASP.NET/WebApplication/Web.config" && gs'
 
 alias gd='git difftool --dir-diff'
 alias gds='git difftool --staged --dir-diff'
