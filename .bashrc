@@ -104,3 +104,13 @@ alias db='grep --color -H "Initial Catalog=[^;]*;" Hexagon3.5\ Optimized/ASP.NET
 alias fixdb="echo --Before-- && db && sed 's/Initial Catalog=[^;]*;/Initial Catalog=4Projects_3G_T2T;/g' Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config > web.config.tmp && mv web.config.tmp Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config && echo --After-- && db"
 
 alias bc="'c:/Program Files (x86)/Beyond Compare 3/bcompare.exe'"
+
+#"cygpath '$@' | xargs -I jayp gitk --all 'jayp'"
+myBlame() {
+#    cygpath \'$1\' | xargs -I jayp gitk --all \'jayp\'
+    cygpath $1 | xargs -t -I jayp echo \'jayp\'
+}
+alias blame=myBlame
+
+alias reload="date && . ~/.bashrc"
+
