@@ -31,7 +31,9 @@ then
 fi
 PS1="$PS1"'\[\033[0m\]'        # change color
 PS1="$PS1"'\n'                 # new line
-PS1="$PS1"'$ '                 # prompt: always $
+PS1="$PS1"'\t $ '                 # prompt: HH:MM:SS folled by $
+
+# http://bneijt.nl/blog/post/add-a-timestamp-to-your-bash-prompt/
 
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
@@ -108,7 +110,7 @@ alias bc="'c:/Program Files (x86)/Beyond Compare 3/bcompare.exe'"
 #"cygpath '$@' | xargs -I jayp gitk --all 'jayp'"
 myBlame() {
 #    cygpath \'$1\' | xargs -I jayp gitk --all \'jayp\'
-    cygpath $1 | xargs -t -I jayp echo \'jayp\'
+    cygpath '\"$@\"' | xargs -t --replace=jayp echo \'jayp\'
 }
 alias blame=myBlame
 
