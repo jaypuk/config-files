@@ -1,9 +1,15 @@
 #https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
 
 get_hash() {
     git rev-parse --short HEAD 2>/dev/null
 }
+
+get_email() {
+    git config user.email
+}
+
+# ansi colors codes =>    http://bluesock.org/~willg/dev/ansi.html
 
 PS1='\[\033]0;$MSYSTEM:${PWD//[^[:ascii:]]/?}\007\]' # set window title
 PS1="$PS1"'\n'                 # new line
@@ -27,11 +33,14 @@ then
 		PS1="$PS1"'`__git_ps1` '   # bash function
         PS1="$PS1"'\[\033[32m\]'   # change to green
         PS1="$PS1"'[`get_hash`] '   # bash function
+        PS1="$PS1"'`get_email` ' # email
 	fi
 fi
-PS1="$PS1"'\[\033[0m\]'        # change color
+PS1="$PS1"'\[\033[0m\]'        # reset color
 PS1="$PS1"'\n'                 # new line
-PS1="$PS1"'\t $ '                 # prompt: HH:MM:SS folled by $
+PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
+PS1="$PS1"'\t$ '                 # prompt: HH:MM:SS followed by $
+PS1="$PS1"'\[\033[0m\]'        # reset color
 
 # http://bneijt.nl/blog/post/add-a-timestamp-to-your-bash-prompt/
 
@@ -97,7 +106,7 @@ alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
 alias prune='git remote prune origin'
 
-alias gb='git branch -vv'
+alias gb='printf "\n" && date && printf "\n" && git branch -vv'
 alias gbr='git branch -r'
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
