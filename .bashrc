@@ -9,6 +9,23 @@ get_email() {
     git config user.email
 }
 
+# http://stackoverflow.com/a/3278427
+branch_status() {
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse @{u})
+    BASE=$(git merge-base @ @{u})
+
+    if [ $LOCAL = $REMOTE ]; then
+        echo "" #"Up-to-date"
+    elif [ $LOCAL = $BASE ]; then
+        echo " Need to pull"
+    elif [ $REMOTE = $BASE ]; then
+        echo " Need to push"
+    else
+        echo " Diverged"
+    fi
+}
+
 # ansi colors codes =>    http://bluesock.org/~willg/dev/ansi.html
 
 PS1='\[\033]0;$MSYSTEM:${PWD//[^[:ascii:]]/?}\007\]' # set window title
@@ -32,7 +49,7 @@ then
 		PS1="$PS1"'\[\033[36m\]'  # change color to cyan
 		PS1="$PS1"'`__git_ps1` '   # bash function
         PS1="$PS1"'\[\033[32m\]'   # change to green
-        PS1="$PS1"'[`get_hash`] '   # bash function
+        PS1="$PS1"'[`get_hash``branch_status`] '   # bash function
         PS1="$PS1"'`get_email` ' # email
 	fi
 fi
