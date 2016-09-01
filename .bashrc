@@ -11,16 +11,19 @@ get_email() {
 
 # http://stackoverflow.com/a/3278427
 branch_status() {
-    LOCAL=$(git rev-parse @)
-    REMOTE=$(git rev-parse @{u})
-    BASE=$(git merge-base @ @{u})
+#    if [`get_hash` = ""]; then
+#        echo ""
+#    else
+        LOCAL=$(git rev-parse @)
+        REMOTE=$(git rev-parse @{u})
+        BASE=$(git merge-base @ @{u})
 
     if [ $LOCAL = $REMOTE ]; then
         echo "" #"Up-to-date"
     elif [ $LOCAL = $BASE ]; then
-        echo " Need to pull"
+        echo " PULL"
     elif [ $REMOTE = $BASE ]; then
-        echo " Need to push"
+        echo " PUSH"
     else
         echo " Diverged"
     fi
@@ -49,7 +52,11 @@ then
 		PS1="$PS1"'\[\033[36m\]'  # change color to cyan
 		PS1="$PS1"'`__git_ps1` '   # bash function
         PS1="$PS1"'\[\033[32m\]'   # change to green
-        PS1="$PS1"'[`get_hash``branch_status`] '   # bash function
+        PS1="$PS1"'[`get_hash`'
+        PS1="$PS1"'\[\033[35m\]'   # change to cyan
+        PS1="$PS1"'`branch_status`'
+        PS1="$PS1"'\[\033[32m\]'   # change to green
+        PS1="$PS1"'] '
         PS1="$PS1"'`get_email` ' # email
 	fi
 fi
@@ -142,3 +149,5 @@ alias blame=myBlame
 
 alias reload="date && . ~/.bashrc"
 
+#http://askubuntu.com/questions/27314/script-to-display-all-terminal-colors#comment1045362_279014
+alias colours='for x in 0 1 4 5 7 8; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";'
