@@ -11,21 +11,24 @@ get_email() {
 
 # http://stackoverflow.com/a/3278427
 branch_status() {
-#    if [`get_hash` = ""]; then
-#        echo ""
-#    else
+    local repo=$(git rev-parse --show-toplevel 2> /dev/null)
+    
+    if [[ ! -e "$repo" ]]; then
+        echo ""
+    else
         LOCAL=$(git rev-parse @)
         REMOTE=$(git rev-parse @{u})
         BASE=$(git merge-base @ @{u})
 
-    if [ $LOCAL = $REMOTE ]; then
-        echo "" #"Up-to-date"
-    elif [ $LOCAL = $BASE ]; then
-        echo " PULL"
-    elif [ $REMOTE = $BASE ]; then
-        echo " PUSH"
-    else
-        echo " Diverged"
+        if [ $LOCAL = $REMOTE ]; then
+            echo "" #"Up-to-date"
+        elif [ $LOCAL = $BASE ]; then
+            echo " PULL"
+        elif [ $REMOTE = $BASE ]; then
+            echo " PUSH"
+        else
+            echo " Diverged"
+        fi
     fi
 }
 
