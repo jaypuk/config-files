@@ -1,5 +1,6 @@
 #https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d)"
+touch ${HISTFILE}
 
 get_hash() {
     git rev-parse --short HEAD 2>/dev/null
