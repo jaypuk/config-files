@@ -7,21 +7,26 @@ get_hash() {
 }
 
 get_email() {
-    git config user.email
+    E=$(git config user.email)
+    if [ $E != "jayesh.patel@viewpoint.com" ]; then
+        echo $E
+    fi
 }
 
 # http://stackoverflow.com/a/3278427
 branch_status() {
     local repo=$(git rev-parse --show-toplevel 2> /dev/null)
-    
+
     if [[ ! -e "$repo" ]]; then
         echo ""
     else
         LOCAL=$(git rev-parse @)
-        REMOTE=$(git rev-parse @{u})
-        BASE=$(git merge-base @ @{u})
+        REMOTE=$(git rev-parse @{u} 2> /dev/null)
+        BASE=$(git merge-base @ @{u} 2> /dev/null)
 
-        if [ $LOCAL = $REMOTE ]; then
+        if [ -z $REMOTE ]; then
+            echo " NO REMOTE"
+        elif [ $LOCAL = $REMOTE ]; then
             echo "" #"Up-to-date"
         elif [ $LOCAL = $BASE ]; then
             echo " PULL"
