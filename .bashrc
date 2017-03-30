@@ -1,5 +1,5 @@
 #https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d)"
+HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d)_${HOSTNAME_SHORT}_$$"
 touch ${HISTFILE}
 
 get_hash() {
@@ -135,12 +135,21 @@ alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
 #export PROMPT_COMMAND="git-title"
 #
 
+gitbranchremote() {
+    if [ $# -ge 1 ]
+    then
+        git branch -r | grep -i $1
+    else
+        git branch -r
+    fi
+}
+alias gbr='gitbranchremote'
 alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
 alias prune='git remote prune origin'
 
 alias gb='printf "\n" && date && printf "\n" && git branch -vv'
-alias gbr='git branch -r'
+
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
 
