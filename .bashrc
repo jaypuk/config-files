@@ -120,7 +120,7 @@ alias gd='git difftool --dir-diff'
 alias gds='git difftool --staged --dir-diff'
 export PATH=$PATH:~/.local/bin/
 
-alias np="/C/Program\ Files\ \(x86\)/Notepad++/notepad++.exe "
+alias np="/C/Program\ Files/Notepad++/notepad++.exe "
 
 #
 #http://www.subfocal.net/post/44278880990/stupid-bash-tricks-show-git-branch-in-your-window
@@ -169,3 +169,5 @@ alias reload="date && . ~/.bashrc"
 
 #http://askubuntu.com/questions/27314/script-to-display-all-terminal-colors#comment1045362_279014
 alias colours='for x in 0 1 4 5 7 8; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";'
+
+alias pass='grep connectionString ./Source/DocControlApi/DocControl.Api/Web.config'
