@@ -104,7 +104,7 @@ function gbd() {
 # from https://coderwall.com/p/euwpig
 # see http://stackoverflow.com/a/15458378 for colour opts
 alias gl='git --no-pager log --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" --abbrev-commit --graph -n 20'
-alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" -n 15'
+alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold green)(%cr) %C(bold magenta)<%an>%Creset" -n 20'
 
 # http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
 #alias gll='git --no-pager log --pretty=format:"%C(bold cyan)%h%C(bold yellow)%d - %Creset%s %C(bold green)(%cr)%Creset %C(bold magenta)<%cn>" --decorate --numstat -n 3'
@@ -146,9 +146,9 @@ gitbranchremote() {
 alias gbr='gitbranchremote'
 alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
-alias prune='git remote prune origin'
+alias prune='git remote prune $(git remote)'
 
-alias gb='printf "\n" && date && printf "\n" && git branch -vv'
+alias gb='printf "\n" && echo $(date) - use gdo alias && printf "\n" && git branch -vv'
 
 alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
@@ -171,3 +171,7 @@ alias reload="date && . ~/.bashrc"
 alias colours='for x in 0 1 4 5 7 8; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";'
 
 alias pass='grep connectionString ./Source/DocControlApi/DocControl.Api/Web.config'
+
+# get commits between current branch and remote
+alias gdo='gll ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) -n 1000'
+
