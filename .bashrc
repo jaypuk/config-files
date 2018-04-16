@@ -79,7 +79,7 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
-alias ll='ls -laFL'
+alias ll='ls -laFhs'
 
 alias gs='git status'
 alias gc='git checkout'
@@ -175,4 +175,41 @@ alias pass='grep connectionString ./Source/DocControlApi/DocControl.Api/Web.conf
 # get commits between current branch and remote
 alias glo='gll ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) -n 1000'
 alias gdo='gd ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) &'
+
+# find common ancestor commit of two branches https://stackoverflow.com/a/1549155/4686102
+alias common='git merge-base'
+
+#https://github.com/raylee/tldr
+alias tldr='~/bin/tldr'
+
+# connect to ubuntu 16.04 server on azure
+alias ssh_az='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
+alias sftp_az='sftp -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
+
+
+# connect to ubuntu server at home
+alias ssh_home='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@jvpatel.ddns.net -p 2123'
+alias sftp_home='sftp -i /j/.ssh/dtjayeshpatel_rsa  -P 2123 jay@jvpatel.ddns.net'
+
+#connect to ubuntu vm on dtjaypatel
+alias ssh_dtjaypatel='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@172.30.240.222'
+alias sftp_dtjaypatel='sftp -i /j/.ssh/dtjayeshpatel_rsa  jay@172.30.240.222'
+
+# rename conemu tab name
+alias name='/c/Program\ Files/ConEmu/ConEmu/RenameTab.cmd $1'
+
+historysearch() {
+    if [ $# -ge 1 ]
+    then
+        history | grep -i $1
+    else
+        history
+    fi
+}
+alias h='historysearch'
+
+#flush history immediately http://www.aloop.org/2012/01/19/flush-commands-to-bash-history-immediately/
+export PROMPT_COMMAND='history -a'
+
+alias nunithtmlreportgenerator="/c/git/NUnit-HTML-Report-Generator/NUnit\ HTML\ Report\ Generator/bin/Debug/NUnitHTMLReportGenerator.exe"
 
