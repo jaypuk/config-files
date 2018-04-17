@@ -213,3 +213,14 @@ export PROMPT_COMMAND='history -a'
 
 alias nunithtmlreportgenerator="/c/git/NUnit-HTML-Report-Generator/NUnit\ HTML\ Report\ Generator/bin/Debug/NUnitHTMLReportGenerator.exe"
 
+alias ubuntu_version='lsb_release -a'
+
+# # displays any screen sessions
+# screen -ls
+
+# alias screenls='screen -ls'
+# alias attach='screen -R '
+# alias serverkey='ssh-keygen -E md5 -lf /etc/ssh/ssh_host_rsa_key.pub'
+
+# echo 'use screenls & attach, Ctrl-A Ctrl-D to detach'
+
