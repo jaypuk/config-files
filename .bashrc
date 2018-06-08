@@ -224,3 +224,10 @@ alias ubuntu_version='lsb_release -a'
 
 # echo 'use screenls & attach, Ctrl-A Ctrl-D to detach'
 
+alias user_secrets="dotnet user-secrets -v list"
+alias grep="grep --colour=auto "
+alias logs="cd '/c/Logs/4PErrorLog/localhost/WebApp/4Projects Ltd/4Projects 3G'"
+
+alias tree="echo 'Use treed or treef'"
+alias treed="cmd //c tree "
+alias treef="cmd //c tree //f "
