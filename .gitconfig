@@ -17,8 +17,11 @@
 	alias = !git config -l | grep alias | cut -c 7-
 	diffbranch = !git diff --name-status $1..$2
     graphviz = "!f() { echo 'digraph git {' ; git --no-pager log --pretty='format:  \"%h\"[label=\"%h%d\\n%s\"];' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
-[credential]
-	helper = !'C:\\Users\\jayesh.patel\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+    # find common ancestor commit of two branches https://stackoverflow.com/a/1549155/4686102
+    common = merge-base
+	root = rev-parse --show-toplevel
+#[credential]
+#	helper = !'C:\\Users\\jayesh.patel\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
 [diff]
 	tool = bc3
 [merge]
@@ -62,3 +65,5 @@
 	remote = green
 [pager]
 	diff = false
+[winUpdater]
+	recentlySeenVersion = 2.18.0.windows.1

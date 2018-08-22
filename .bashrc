@@ -13,6 +13,16 @@ get_email() {
     fi
 }
 
+git_root() {
+    local repo=$(git rev-parse --show-toplevel 2> /dev/null)
+
+    if [[ ! -e "$repo" ]]; then
+        echo $(pwd)
+    else
+        echo $(basename `git rev-parse --show-toplevel`)
+    fi
+}
+
 # http://stackoverflow.com/a/3278427
 branch_status() {
     local repo=$(git rev-parse --show-toplevel 2> /dev/null)
@@ -40,7 +50,8 @@ branch_status() {
 
 # ansi colors codes =>    http://bluesock.org/~willg/dev/ansi.html
 
-PS1='\[\033]0;$MSYSTEM:${PWD//[^[:ascii:]]/?}\007\]' # set window title
+PS1='\[\033]0;`git_root`\007\]' # set window title
+#PS1='\[\033]0;$MSYSTEM:${PWD//[^[:ascii:]]/?}\007\]' # set window title
 PS1="$PS1"'\n'                 # new line
 #PS1="$PS1"'\[\033[32m\]'       # change to green
 #PS1="$PS1"'\u@\h '             # user@host<space>
@@ -231,3 +242,5 @@ alias logs="cd '/c/Logs/4PErrorLog/localhost/WebApp/4Projects Ltd/4Projects 3G'"
 alias tree="echo 'Use treed or treef'"
 alias treed="cmd //c tree "
 alias treef="cmd //c tree //f "
+
+alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
