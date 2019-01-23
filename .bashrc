@@ -193,6 +193,11 @@ alias common='git merge-base'
 #https://github.com/raylee/tldr
 alias tldr='~/bin/tldr'
 
+# https://news.ycombinator.com/item?id=18903234
+function cheat() {
+      curl cht.sh/$1
+}
+
 # connect to ubuntu 16.04 server on azure
 alias ssh_az='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
 alias sftp_az='sftp -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
@@ -244,3 +249,5 @@ alias treed="cmd //c tree "
 alias treef="cmd //c tree //f "
 
 alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
+alias mfa="echo S6LIEG6TIDZUV452 && wsl oathtool -b -w 2 --totp S6LIEG6TIDZUV452"
+alias redis-cli="wsl redis-cli -h 52.16.88.6 -p 6379 --verbose"

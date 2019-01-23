@@ -1,4 +1,5 @@
 [gui]
+	recentrepo = C:/git/VFP
 [user]
 	name = Jayesh Patel
 	email = jayesh.patel@viewpoint.com
@@ -66,4 +67,4 @@
 [pager]
 	diff = false
 [winUpdater]
-	recentlySeenVersion = 2.18.0.windows.1
+	recentlySeenVersion = 2.20.1.windows.1
