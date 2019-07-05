@@ -67,7 +67,7 @@
 [pager]
 	diff = false
 [winUpdater]
-	recentlySeenVersion = 2.21.0.windows.1
+	recentlySeenVersion = 2.22.0.windows.1
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -75,6 +75,11 @@
 	clean = git-lfs clean -- %f
 # meld setup: https://stackoverflow.com/a/34119867/4686102
 [difftool "meld"]
-    path = C:/Program Files (x86)/Meld/Meld.exe
+    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$LOCAL"
 [mergetool "meld"]
-    path = C:/Program Files (x86)/Meld/Meld.exe
+    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$MERGED" "$PWD/$LOCAL" --output "$PWD/$MERGED"
+
+[difftool "vscode"]
+    cmd = 'c:/Users/jayesh.patel/AppData/Local/Programs/Microsoft VS Code/Code.exe' --wait --diff "$LOCAL" "$REMOTE"
+[mergetool "vscode"]
+    cmd = 'c:/Users/jayesh.patel/AppData/Local/Programs/Microsoft VS Code/Code.exe' --wait "$MERGED"

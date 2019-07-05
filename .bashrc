@@ -245,8 +245,8 @@ alias grep="grep --colour=auto "
 alias logs="cd '/c/Logs/4PErrorLog/localhost/WebApp/4Projects Ltd/4Projects 3G'"
 
 alias tree="echo 'Use treed or treef'"
-alias treed="cmd //c tree "
-alias treef="cmd //c tree //f "
+alias treed="cmd //c tree //a "
+alias treef="cmd //c tree //a //f "
 
 alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
 alias mfa="echo S6LIEG6TIDZUV452 && wsl oathtool -b -w 2 --totp S6LIEG6TIDZUV452"
