@@ -1,3 +1,7 @@
+# https://zwischenzugs.com/2019/04/03/eight-obscure-bash-options-you-might-want-to-know-about/
+shopt -s histverify
+#https://zwischenzugs.com/2019/05/11/seven-surprising-bash-variables/
+HISTTIMEFORMAT='%Y-%m-%dT%H:%M:%SZ '
 #https://twitter.com/michaelhoffman/status/639178145673932800
 HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d)_${HOSTNAME_SHORT}_$$"
 touch ${HISTFILE}
@@ -8,7 +12,7 @@ get_hash() {
 
 get_email() {
     E=$(git config user.email)
-    if [ $E != "jayesh.patel@viewpoint.com" ]; then
+    if [ $E != "jayesh.patel@accruent.com" ]; then
         echo $E
     fi
 }
@@ -167,7 +171,7 @@ alias gf='git fetch'
 alias db='grep --color -H "Initial Catalog=[^;]*;" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
 alias fixdb="echo --Before-- && db && sed 's/Initial Catalog=[^;]*;/Initial Catalog=4Projects_3G_T2T;/g' Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config > web.config.tmp && mv web.config.tmp Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config && echo --After-- && db"
 
-alias bc="'c:/Program Files (x86)/Beyond Compare 3/bcompare.exe'"
+alias bc="'C:/Program Files/Beyond Compare 4/bcompare.exe'"
 
 #"cygpath '$@' | xargs -I jayp gitk --all 'jayp'"
 myBlame() {
@@ -198,18 +202,14 @@ function cheat() {
       curl cht.sh/$1
 }
 
-# connect to ubuntu 16.04 server on azure
-alias ssh_az='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
-alias sftp_az='sftp -i /j/.ssh/dtjayeshpatel_rsa  jay@13.95.192.250'
+# connect to ubuntu 18.04 server on azure
+alias ssh_az='ssh -i /c/Users/jayesh.patel/.ssh/az jay@13.95.192.250'
+alias sftp_az='sftp -i /c/Users/jayesh.patel/.ssh/az jay@13.95.192.250'
 
 
 # connect to ubuntu server at home
 alias ssh_home='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@jvpatel.ddns.net -p 2123'
 alias sftp_home='sftp -i /j/.ssh/dtjayeshpatel_rsa  -P 2123 jay@jvpatel.ddns.net'
-
-#connect to ubuntu vm on dtjaypatel
-alias ssh_dtjaypatel='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@172.30.240.222'
-alias sftp_dtjaypatel='sftp -i /j/.ssh/dtjayeshpatel_rsa  jay@172.30.240.222'
 
 # rename conemu tab name
 alias name='/c/Program\ Files/ConEmu/ConEmu/RenameTab.cmd $1'
@@ -251,3 +251,13 @@ alias treef="cmd //c tree //f "
 alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
 alias mfa="echo S6LIEG6TIDZUV452 && wsl oathtool -b -w 2 --totp S6LIEG6TIDZUV452"
 alias redis-cli="wsl redis-cli -h 52.16.88.6 -p 6379 --verbose"
+
+alias mspec="/c/git/kyk_web/packages/Machine.Specifications.0.5.9/tools/mspec-clr4.exe"
+alias mspec2="/c/git/kyk_web/packages/Machine.Specifications.Runner.Console.1.0.0/tools/mspec-clr4.exe"
+
+alias mspec_run_tests="tail -n 1 ~/.bashrc"
+
+cd /c/git/kyk_web
+
+# leave following as last line
+# mspec/mspec2 -t --html ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).html --xml ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).xml /c/git/kyk_web/kykloud.Tests/bin/Debug/kykloud.Tests.dll -i "tests"
