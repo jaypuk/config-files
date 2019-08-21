@@ -6,6 +6,7 @@
 [core]
 	autocrlf = true
 	editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+#	editor = \"C:\\Users\\jayesh.patel\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
 [alias]
 	st = status
     br = branch
@@ -67,17 +68,24 @@
 [pager]
 	diff = false
 [winUpdater]
-	recentlySeenVersion = 2.22.0.windows.1
+	recentlySeenVersion = 2.23.0.windows.1
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+    
 # meld setup: https://stackoverflow.com/a/34119867/4686102
+#[difftool "meld"]
+#    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$LOCAL"
+#[mergetool "meld"]
+#    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$MERGED" "$PWD/$LOCAL" --output "$PWD/$MERGED"
+
 [difftool "meld"]
-    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$LOCAL"
+    path = C:/Program Files (x86)/Meld/Meld.exe
+#	path = C:/Program Files/Beyond Compare 4/bcompare.exe
 [mergetool "meld"]
-    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$MERGED" "$PWD/$LOCAL" --output "$PWD/$MERGED"
+    path = '/c/Program Files (x86)/Meld/Meld.exe'
 
 [difftool "vscode"]
     cmd = 'c:/Users/jayesh.patel/AppData/Local/Programs/Microsoft VS Code/Code.exe' --wait --diff "$LOCAL" "$REMOTE"

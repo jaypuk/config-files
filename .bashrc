@@ -185,8 +185,6 @@ alias reload="date && . ~/.bashrc"
 #http://askubuntu.com/questions/27314/script-to-display-all-terminal-colors#comment1045362_279014
 alias colours='for x in 0 1 4 5 7 8; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";'
 
-alias pass='grep connectionString ./Source/DocControlApi/DocControl.Api/Web.config'
-
 # get commits between current branch and remote
 alias glo='gll ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) -n 1000'
 alias gdo='gd ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) &'
@@ -257,7 +255,10 @@ alias mspec2="/c/git/kyk_web/packages/Machine.Specifications.Runner.Console.1.0.
 
 alias mspec_run_tests="tail -n 1 ~/.bashrc"
 
+alias hosts="np /C/Windows/System32/Drivers/etc/hosts"
+
 cd /c/git/kyk_web
 
 # leave following as last line
 # mspec/mspec2 -t --html ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).html --xml ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).xml /c/git/kyk_web/kykloud.Tests/bin/Debug/kykloud.Tests.dll -i "tests"
+
