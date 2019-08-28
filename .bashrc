@@ -235,6 +235,7 @@ alias ubuntu_version='lsb_release -a'
 # alias screenls='screen -ls'
 # alias attach='screen -R '
 # alias serverkey='ssh-keygen -E md5 -lf /etc/ssh/ssh_host_rsa_key.pub'
+# alias sudo_update_all='sudo apt update && sudo apt upgrade -y'
 
 # echo 'use screenls & attach, Ctrl-A Ctrl-D to detach'
 
