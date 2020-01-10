@@ -1,51 +1,23 @@
-[gui]
-	recentrepo = C:/git/VFP
 [user]
 	name = Jayesh Patel
-	email = jayesh.patel@accruent.com
-[core]
-	autocrlf = true
-	editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
-#	editor = \"C:\\Users\\jayesh.patel\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+	email = jayesh.patel@sage.com
+
 [alias]
 	st = status
     br = branch
     co = checkout
-    # find all duplicate files
-	dupes = !git ls-tree -r HEAD | cut -c 13- | sort | uniq -D -w 40
-    # find a file in the repo
-	grep = !git ls-files | grep -i
-    # list all aliases
+# list all aliases
 	alias = !git config -l | grep alias | cut -c 7-
-	diffbranch = !git diff --name-status $1..$2
-    graphviz = "!f() { echo 'digraph git {' ; git --no-pager log --pretty='format:  \"%h\"[label=\"%h%d\\n%s\"];' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
-    # find common ancestor commit of two branches https://stackoverflow.com/a/1549155/4686102
     common = merge-base
 	root = rev-parse --show-toplevel
-#[credential]
-#	helper = !'C:\\Users\\jayesh.patel\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+
 [diff]
-	tool = bc3
+	tool = vscode
 [merge]
-	tool = bc3
-[difftool "diffmerge"]
-    cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' "\"$LOCAL\"" "\"$REMOTE\""
-[mergetool "diffmerge"]
-    cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE" 
-    trustExitCode = true
-    keepBackup = false
-
-    # color codes http://stackoverflow.com/a/15458378
-
+	tool = vscode
 [mergetool]
 	keepBackup = false
-[difftool "sourcetree"]
-	cmd = '' \"$LOCAL\" \"$REMOTE\"
-[mergetool "sourcetree"]
-	cmd = "'' "
-	trustExitCode = true
-[push]
-	default = simple
+
 [color]
 [color "interactive"]
 	prompt = yellow
@@ -56,38 +28,17 @@
     new = green bold
     frag = magenta bold
     whitespace = white bold reverse
-[difftool "bc3"]
-	path = C:/Program Files/Beyond Compare 4/bcompare.exe
-[mergetool "bc3"]
-	path = C:/Program Files/Beyond Compare 4/bcompare.exe
 
 [color "branch"]
     current = yellow reverse
     local = yellow
 	remote = green
-[pager]
-	diff = false
-[winUpdater]
-	recentlySeenVersion = 2.23.0.windows.1
-[filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-    
-# meld setup: https://stackoverflow.com/a/34119867/4686102
-#[difftool "meld"]
-#    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$LOCAL"
-#[mergetool "meld"]
-#    cmd = 'C:/Program Files (x86)/Meld/Meld.exe' "$PWD/$REMOTE" "$PWD/$MERGED" "$PWD/$LOCAL" --output "$PWD/$MERGED"
 
-[difftool "meld"]
-    path = C:/Program Files (x86)/Meld/Meld.exe
-#	path = C:/Program Files/Beyond Compare 4/bcompare.exe
-[mergetool "meld"]
-    path = '/c/Program Files (x86)/Meld/Meld.exe'
+    [pager]
+	diff = false
+
 
 [difftool "vscode"]
-    cmd = 'c:/Users/jayesh.patel/AppData/Local/Programs/Microsoft VS Code/Code.exe' --wait --diff "$LOCAL" "$REMOTE"
+    cmd = 'code' --wait --diff "$LOCAL" "$REMOTE"
 [mergetool "vscode"]
-    cmd = 'c:/Users/jayesh.patel/AppData/Local/Programs/Microsoft VS Code/Code.exe' --wait "$MERGED"
+    cmd = 'code' --wait "$MERGED"

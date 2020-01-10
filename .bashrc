@@ -2,8 +2,10 @@
 shopt -s histverify
 #https://zwischenzugs.com/2019/05/11/seven-surprising-bash-variables/
 HISTTIMEFORMAT='%Y-%m-%dT%H:%M:%SZ '
+HISTDIR="${HOME}/.history"
+if [ ! -d ${HISTDIR} ]; then mkdir ${HISTDIR}; fi
 #https://twitter.com/michaelhoffman/status/639178145673932800
-HISTFILE="${HOME}/.history/$(date -u +%Y-%m-%d)_${HOSTNAME_SHORT}_$$"
+HISTFILE="${HISTDIR}/$(date -u +%Y-%m-%d)_${HOSTNAME_SHORT}_$$"
 touch ${HISTFILE}
 
 get_hash() {
@@ -12,7 +14,7 @@ get_hash() {
 
 get_email() {
     E=$(git config user.email)
-    if [ $E != "jayesh.patel@accruent.com" ]; then
+    if [ $E != "jayesh.patel@sage.com" ]; then
         echo $E
     fi
 }
@@ -63,8 +65,8 @@ PS1="$PS1"'\n'                 # new line
 #PS1="$PS1"'$MSYSTEM '          # show MSYSTEM
 PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
 PS1="$PS1"'\w'                 # current working directory
-if test -z "$WINELOADERNOEXEC"
-then
+#if test -z "$WINELOADERNOEXEC"
+#then
 	GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
 	COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
 	COMPLETION_PATH="${COMPLETION_PATH%/lib/git-core}"
@@ -83,7 +85,7 @@ then
         PS1="$PS1"'] '
         PS1="$PS1"'`get_email` ' # email
 	fi
-fi
+#fi
 PS1="$PS1"'\[\033[0m\]'        # reset color
 PS1="$PS1"'\n'                 # new line
 PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
@@ -94,7 +96,7 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
-alias ll='ls -laFhs'
+alias ll='ls -laFh'
 
 alias gs='git status'
 alias gc='git checkout'
@@ -126,16 +128,19 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 
 
 #alias dragon='/c/tools/gitscc/dragon.exe /c/git/4bim &'
-alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
+#alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
 alias cls='clear'
 
-alias stageAllButConfig='git add --all && git reset -- "Hexagon3.5 Optimized/ASP.NET/WebApplication/Web.config" && gs'
+#alias stageAllButConfig='git add --all && git reset -- "Hexagon3.5 Optimized/ASP.NET/WebApplication/Web.config" && gs'
 
 alias gd='git difftool --dir-diff'
 alias gds='git difftool --staged --dir-diff'
-export PATH=$PATH:~/.local/bin/
 
-alias np="/C/Program\ Files/Notepad++/notepad++.exe "
+# for tldr
+export PATH=$PATH:~/bin/
+complete -W "$(tldr 2>/dev/null --list)" tldr
+
+#alias np="/C/Program\ Files/Notepad++/notepad++.exe "
 
 #
 #http://www.subfocal.net/post/44278880990/stupid-bash-tricks-show-git-branch-in-your-window
@@ -159,26 +164,26 @@ gitbranchremote() {
     fi
 }
 alias gbr='gitbranchremote'
-alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
+#alias gensvg='git graphviz  | dot -Tsvg -o $(date +%F_%H%M).svg'
 
 alias prune='git remote prune $(git remote)'
 
 alias gb='printf "\n" && echo $(date) - use glo/gdo aliases && printf "\n" && git branch -vv'
 
-alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
+#alias nuke='((git rm .gitattributes && git add -A) && git reset --hard) && git status'
 alias gf='git fetch'
 
-alias db='grep --color -H "Initial Catalog=[^;]*;" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
-alias fixdb="echo --Before-- && db && sed 's/Initial Catalog=[^;]*;/Initial Catalog=4Projects_3G_T2T;/g' Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config > web.config.tmp && mv web.config.tmp Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config && echo --After-- && db"
+#alias db='grep --color -H "Initial Catalog=[^;]*;" Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config'
+#alias fixdb="echo --Before-- && db && sed 's/Initial Catalog=[^;]*;/Initial Catalog=4Projects_3G_T2T;/g' Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config > web.config.tmp && mv web.config.tmp Hexagon3.5\ Optimized/ASP.NET/WebApplication/Web.config && echo --After-- && db"
 
-alias bc="'C:/Program Files/Beyond Compare 4/bcompare.exe'"
+#alias bc="'C:/Program Files/Beyond Compare 4/bcompare.exe'"
 
 #"cygpath '$@' | xargs -I jayp gitk --all 'jayp'"
-myBlame() {
+#myBlame() {
 #    cygpath \'$1\' | xargs -I jayp gitk --all \'jayp\'
-    cygpath '\"$@\"' | xargs -t --replace=jayp echo \'jayp\'
-}
-alias blame=myBlame
+#    cygpath '\"$@\"' | xargs -t --replace=jayp echo \'jayp\'
+#}
+#alias blame=myBlame
 
 alias reload="date && . ~/.bashrc"
 
@@ -201,16 +206,16 @@ function cheat() {
 }
 
 # connect to ubuntu 18.04 server on azure
-alias ssh_az='ssh -i /c/Users/jayesh.patel/.ssh/az jay@13.95.192.250'
-alias sftp_az='sftp -i /c/Users/jayesh.patel/.ssh/az jay@13.95.192.250'
+alias ssh_az='ssh -i ~/.ssh/az jay@13.95.192.250'
+alias sftp_az='sftp -i ~/.ssh/az jay@13.95.192.250'
 
 
 # connect to ubuntu server at home
-alias ssh_home='ssh -i /j/.ssh/dtjayeshpatel_rsa  jay@jvpatel.ddns.net -p 2123'
-alias sftp_home='sftp -i /j/.ssh/dtjayeshpatel_rsa  -P 2123 jay@jvpatel.ddns.net'
+alias ssh_home='ssh -i ~/.ssh/dtjayeshpatel_rsa  jay@jvpatel.ddns.net -p 2123'
+alias sftp_home='sftp -i ~/.ssh/dtjayeshpatel_rsa  -P 2123 jay@jvpatel.ddns.net'
 
 # rename conemu tab name
-alias name='/c/Program\ Files/ConEmu/ConEmu/RenameTab.cmd $1'
+#alias name='/c/Program\ Files/ConEmu/ConEmu/RenameTab.cmd $1'
 
 historysearch() {
     if [ $# -ge 1 ]
@@ -222,43 +227,55 @@ historysearch() {
 }
 alias h='historysearch'
 
+historicalsearch() {
+    if [ $# -ge 1 ]
+    then
+        grep -i $1 ${HISTDIR}/*
+    else
+        echo "need a param"
+    fi
+}
+alias hs='historicalsearch'
+
 #flush history immediately http://www.aloop.org/2012/01/19/flush-commands-to-bash-history-immediately/
 export PROMPT_COMMAND='history -a'
 
-alias nunithtmlreportgenerator="/c/git/NUnit-HTML-Report-Generator/NUnit\ HTML\ Report\ Generator/bin/Debug/NUnitHTMLReportGenerator.exe"
+#alias nunithtmlreportgenerator="/c/git/NUnit-HTML-Report-Generator/NUnit\ HTML\ Report\ Generator/bin/Debug/NUnitHTMLReportGenerator.exe"
 
-alias ubuntu_version='lsb_release -a'
+#alias ubuntu_version='lsb_release -a'
 
 # # displays any screen sessions
-# screen -ls
+#screen -ls
 
-# alias screenls='screen -ls'
-# alias attach='screen -R '
-# alias serverkey='ssh-keygen -E md5 -lf /etc/ssh/ssh_host_rsa_key.pub'
+#alias screenls='screen -ls'
+#alias attach='screen -R '
+alias serverkey='ssh-keygen -E md5 -lf /etc/ssh/ssh_host_rsa_key.pub'
 # alias sudo_update_all='sudo apt update && sudo apt upgrade -y'
 
-# echo 'use screenls & attach, Ctrl-A Ctrl-D to detach'
+#echo 'use screenls & attach, Ctrl-A Ctrl-D to detach'
 
-alias user_secrets="dotnet user-secrets -v list"
+#alias user_secrets="dotnet user-secrets -v list"
 alias grep="grep --colour=auto "
-alias logs="cd '/c/Logs/4PErrorLog/localhost/WebApp/4Projects Ltd/4Projects 3G'"
+#alias logs="cd '/c/Logs/4PErrorLog/localhost/WebApp/4Projects Ltd/4Projects 3G'"
 
-alias tree="echo 'Use treed or treef'"
-alias treed="cmd //c tree //a "
-alias treef="cmd //c tree //a //f "
+#alias tree="echo 'Use treed or treef'"
+#alias treed="cmd //c tree //a "
+#alias treef="cmd //c tree //a //f "
 
-alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
-alias mfa="echo S6LIEG6TIDZUV452 && wsl oathtool -b -w 2 --totp S6LIEG6TIDZUV452"
-alias redis-cli="wsl redis-cli -h 52.16.88.6 -p 6379 --verbose"
+#alias code="/c/Users/jayesh.patel/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"
+#alias mfa="echo S6LIEG6TIDZUV452 && wsl oathtool -b -w 2 --totp S6LIEG6TIDZUV452"
+#alias redis-cli="wsl redis-cli -h 52.16.88.6 -p 6379 --verbose"
 
-alias mspec="/c/git/kyk_web/packages/Machine.Specifications.0.5.9/tools/mspec-clr4.exe"
-alias mspec2="/c/git/kyk_web/packages/Machine.Specifications.Runner.Console.1.0.0/tools/mspec-clr4.exe"
+#alias mspec="/c/git/kyk_web/packages/Machine.Specifications.0.5.9/tools/mspec-clr4.exe"
+#alias mspec2="/c/git/kyk_web/packages/Machine.Specifications.Runner.Console.1.0.0/tools/mspec-clr4.exe"
 
-alias mspec_run_tests="tail -n 1 ~/.bashrc"
+#alias mspec_run_tests="tail -n 1 ~/.bashrc"
 
-alias hosts="np /C/Windows/System32/Drivers/etc/hosts"
+#alias hosts="np /C/Windows/System32/Drivers/etc/hosts"
+alias aws_login="`aws ecr get-login --no-include-email`"
 
-cd /c/git/kyk_web
+aws_login
+cd ~/dev/
 
 # leave following as last line
 # mspec/mspec2 -t --html ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).html --xml ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).xml /c/git/kyk_web/kykloud.Tests/bin/Debug/kykloud.Tests.dll -i "tests"
