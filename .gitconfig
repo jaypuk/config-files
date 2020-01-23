@@ -18,6 +18,11 @@
 [mergetool]
 	keepBackup = false
 
+[difftool "vscode"]
+    cmd = code --wait --diff "$LOCAL" "$REMOTE"
+[mergetool "vscode"]
+	cmd = code --wait "$MERGED"
+
 [color]
 [color "interactive"]
 	prompt = yellow
@@ -34,11 +39,25 @@
     local = yellow
 	remote = green
 
-    [pager]
-	diff = false
+[pager]
+    diff = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesfile = /Users/jayesh.patel/.gitignore_global
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 
-[difftool "vscode"]
-    cmd = 'code' --wait --diff "$LOCAL" "$REMOTE"
-[mergetool "vscode"]
-    cmd = 'code' --wait "$MERGED"
+[difftool "bbdiff"]
+	cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
+	prompt = false
+[mergetool "bbdiff"]
+	cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
