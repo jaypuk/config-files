@@ -1,31 +1,26 @@
 [user]
-	name = Jayesh Patel
-	email = jayesh.patel@sage.com
+  name = Jayesh Patel
+  email = jayesh.patel@sage.com
 
 [alias]
-	st = status
+  st = status
     br = branch
     co = checkout
 # list all aliases
-	alias = !git config -l | grep alias | cut -c 7-
+  alias = !git config -l | grep alias | cut -c 7-
     common = merge-base
-	root = rev-parse --show-toplevel
+  root = rev-parse --show-toplevel
 
 [diff]
-	tool = vscode
+  tool = diffmerge
 [merge]
-	tool = vscode
+  tool = diffmerge
 [mergetool]
-	keepBackup = false
-
-[difftool "vscode"]
-    cmd = code --wait --diff "$LOCAL" "$REMOTE"
-[mergetool "vscode"]
-	cmd = code --wait "$MERGED"
+  keepBackup = false
 
 [color]
 [color "interactive"]
-	prompt = yellow
+  prompt = yellow
 
 [color "diff"]
     meta = yellow bold
@@ -37,17 +32,29 @@
 [color "branch"]
     current = yellow reverse
     local = yellow
-	remote = green
+  remote = green
 
 [pager]
     diff = false
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [core]
-	excludesfile = /Users/jayesh.patel/.gitignore_global
+  excludesfile = /Users/jayesh.patel/.gitignore_global
+
+[difftool "diffmerge"]
+  cmd = diffmerge "$LOCAL" "$REMOTE"
+[mergetool "diffmerge"]
+  cmd = diffmerge --merge --result="$MERGED" "$LOCAL" "$(if test -f "$BASE"; then echo "$BASE"; else echo "$LOCAL"; fi)" "$REMOTE"
+  trustExitCode = true
+  keepBackup = false  
+
+[difftool "vscode"]
+    cmd = code --wait --diff "$LOCAL" "$REMOTE"
+[mergetool "vscode"]
+  cmd = code --wait "$MERGED"
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -57,7 +64,7 @@
 	trustExitCode = true
 
 [difftool "bbdiff"]
-	cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
-	prompt = false
+  cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
+  prompt = false
 [mergetool "bbdiff"]
-	cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
+  cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"

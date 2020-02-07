@@ -67,10 +67,11 @@ PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
 PS1="$PS1"'\w'                 # current working directory
 #if test -z "$WINELOADERNOEXEC"
 #then
-	GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
-	COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
-	COMPLETION_PATH="${COMPLETION_PATH%/lib/git-core}"
-	COMPLETION_PATH="$COMPLETION_PATH/share/git/completion"
+#	GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
+#	COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
+#	COMPLETION_PATH="${COMPLETION_PATH%/lib/git-core}"
+#	COMPLETION_PATH="$COMPLETION_PATH/share/git/completion"
+	COMPLETION_PATH="/usr/local/git/contrib/completion"
 	if test -f "$COMPLETION_PATH/git-prompt.sh"
 	then
 		. "$COMPLETION_PATH/git-completion.bash"
@@ -97,7 +98,7 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
 alias ll='ls -laFh'
-
+alias ..='cd ..'
 alias gs='git status'
 alias gc='git checkout'
 
@@ -130,6 +131,11 @@ alias gll='git --no-pager  log --oneline  --pretty=format:"%C(bold cyan)%h%Crese
 #alias dragon='/c/tools/gitscc/dragon.exe /c/git/4bim &'
 #alias dragon='/c/Program\ Files\ \(x86\)/Git/bin/dragon.exe /c/git/Engineering &'
 alias cls='clear'
+alias size_tty='stty size'
+
+tty_dimensions() {
+  stty size | awk '{printf("%sw x %sc", $1, $2)}'
+}
 
 #alias stageAllButConfig='git add --all && git reset -- "Hexagon3.5 Optimized/ASP.NET/WebApplication/Web.config" && gs'
 
@@ -275,11 +281,14 @@ alias grep="grep --colour=auto "
 #alias hosts="np /C/Windows/System32/Drivers/etc/hosts"
 
 alias d="docker"
+alias dps="docker ps"
 alias aws_login="`aws ecr get-login --no-include-email`"
 
 alias devimg="echo docker run -it --rm --name dev -v $PWD:/usr/src/app -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro -v ~/bundle-cache:/usr/local/bundle -v ~/.bashrc:/root/.bashrc:ro devimg"
 
-alias docker_kill_all="docker rm -f $(docker ps -aq)"
+alias docker_kill_all="echo docker rm -f \$\(docker ps -aq\)"
+alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer"
+alias plantuml_start="docker run -d -p 8888:8080 plantuml/plantuml-server"
 
 command_exists() {
     command -v "$1" &> /dev/null;
@@ -293,4 +302,18 @@ command_exists() {
 
 # leave following as last line
 # mspec/mspec2 -t --html ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).html --xml ./kykloud.Tests_$(date -u +%Y-%m-%d_%H%M).xml /c/git/kyk_web/kykloud.Tests/bin/Debug/kykloud.Tests.dll -i "tests"
+
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
+export LESS=' -R -X -F '
+
+# https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
+# Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
