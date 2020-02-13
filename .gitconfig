@@ -1,6 +1,6 @@
 [user]
-  name = Jayesh Patel
-  email = jayesh.patel@sage.com
+	name = Jayesh Patel
+	email = jayesh.patel@sage.com
 
 [alias]
   st = status
@@ -42,7 +42,7 @@
   process = git-lfs filter-process
   required = true
 [core]
-  excludesfile = /Users/jayesh.patel/.gitignore_global
+	excludesfile = /Users/jayesh.patel/.gitignore_global
 
 [difftool "diffmerge"]
   cmd = diffmerge "$LOCAL" "$REMOTE"
@@ -68,3 +68,5 @@
   prompt = false
 [mergetool "bbdiff"]
   cmd = bbdiff --wait --resume "$LOCAL" "$REMOTE"
+[commit]
+	template = /Users/jayesh.patel/.stCommitMsg

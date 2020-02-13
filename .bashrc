@@ -287,8 +287,10 @@ alias aws_login="`aws ecr get-login --no-include-email`"
 alias devimg="echo docker run -it --rm --name dev -v $PWD:/usr/src/app -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro -v ~/bundle-cache:/usr/local/bundle -v ~/.bashrc:/root/.bashrc:ro devimg"
 
 alias docker_kill_all="echo docker rm -f \$\(docker ps -aq\)"
+alias docker_prune_volumes="echo docker system prune -f --volumes"
 alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer"
 alias plantuml_start="docker run -d -p 8888:8080 plantuml/plantuml-server"
+alias up_and_watch="docker-compose up -d && watch -n 2 docker-compose ps"
 
 command_exists() {
     command -v "$1" &> /dev/null;
@@ -317,3 +319,5 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+
+source /Users/jayesh.patel/Library/Preferences/org.dystroy.broot/launcher/bash/br
