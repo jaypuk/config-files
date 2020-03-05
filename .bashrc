@@ -54,6 +54,20 @@ branch_status() {
     fi
 }
 
+any_local_changes() {
+    local repo=$(git rev-parse --show-toplevel 2> /dev/null)
+
+    if [[ ! -e "$repo" ]]; then
+        echo ""
+    else
+        if [[ `git status --porcelain` ]]; then
+            echo  " ** DIRTY **"
+        else
+            echo ""
+        fi
+    fi
+}
+
 # ansi colors codes =>    http://bluesock.org/~willg/dev/ansi.html
 
 PS1='\[\033]0;`git_root`\007\]' # set window title
@@ -82,6 +96,7 @@ PS1="$PS1"'\w'                 # current working directory
         PS1="$PS1"'[`get_hash`'
         PS1="$PS1"'\[\033[35m\]'   # change to cyan
         PS1="$PS1"'`branch_status`'
+        PS1="$PS1"'`any_local_changes`'
         PS1="$PS1"'\[\033[32m\]'   # change to green
         PS1="$PS1"'] '
         PS1="$PS1"'`get_email` ' # email
@@ -99,6 +114,7 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 
 alias ll='ls -laFh'
 alias ..='cd ..'
+alias cd..='cd ..'
 alias gs='git status'
 alias gc='git checkout'
 
@@ -134,7 +150,7 @@ alias cls='clear'
 alias size_tty='stty size'
 
 tty_dimensions() {
-  stty size | awk '{printf("%sw x %sc", $1, $2)}'
+  stty size | awk '{printf("%s x %s", $2, $1)}'
 }
 
 #alias stageAllButConfig='git add --all && git reset -- "Hexagon3.5 Optimized/ASP.NET/WebApplication/Web.config" && gs'
@@ -199,7 +215,7 @@ alias colours='for x in 0 1 4 5 7 8; do for i in {30..37}; do for a in {40..47};
 
 # get commits between current branch and remote
 alias glo='gll ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) -n 1000'
-alias gdo='gd ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) &'
+alias gdo='git diff ..$(git remote)/$(git rev-parse --abbrev-ref HEAD) &'
 
 # find common ancestor commit of two branches https://stackoverflow.com/a/1549155/4686102
 alias common='git merge-base'
@@ -282,6 +298,7 @@ alias grep="grep --colour=auto "
 
 alias d="docker"
 alias dps="docker ps"
+alias da="docker attach"
 alias aws_login="`aws ecr get-login --no-include-email`"
 
 alias devimg="echo docker run -it --rm --name dev -v $PWD:/usr/src/app -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro -v ~/bundle-cache:/usr/local/bundle -v ~/.bashrc:/root/.bashrc:ro devimg"
@@ -291,6 +308,7 @@ alias docker_prune_volumes="echo docker system prune -f --volumes"
 alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer"
 alias plantuml_start="docker run -d -p 8888:8080 plantuml/plantuml-server"
 alias up_and_watch="docker-compose up -d && watch -n 2 docker-compose ps"
+alias seq="docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -p 9001:80 datalust/seq:latest"
 
 command_exists() {
     command -v "$1" &> /dev/null;
