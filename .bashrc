@@ -112,7 +112,8 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
-alias ll='ls -laFh'
+alias ll='ls -laFhG'
+alias ls='ls -FG'
 alias ..='cd ..'
 alias cd..='cd ..'
 alias gs='git status'
@@ -309,6 +310,8 @@ alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/do
 alias plantuml_start="docker run -d -p 8888:8080 plantuml/plantuml-server"
 alias up_and_watch="docker-compose up -d && watch -n 2 docker-compose ps"
 alias seq="docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -p 9001:80 datalust/seq:latest"
+alias chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+alias ss="stty sane"
 
 command_exists() {
     command -v "$1" &> /dev/null;
