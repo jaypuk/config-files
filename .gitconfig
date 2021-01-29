@@ -43,6 +43,7 @@
   required = true
 [core]
 	excludesfile = /Users/jayesh.patel/.gitignore_global
+  pager = "delta --dark"
 
 [difftool "diffmerge"]
   cmd = diffmerge "$LOCAL" "$REMOTE"

@@ -8,6 +8,9 @@ if [ ! -d ${HISTDIR} ]; then mkdir ${HISTDIR}; fi
 HISTFILE="${HISTDIR}/$(date -u +%Y-%m-%d)_${HOSTNAME_SHORT}_$$"
 touch ${HISTFILE}
 
+# https://stackoverflow.com/a/46359132 https://geoff.greer.fm/lscolors/
+export LSCOLORS="exfxcxdxgxegedabagacad"
+
 get_hash() {
     git rev-parse --short HEAD 2>/dev/null
 }
@@ -113,11 +116,11 @@ PS1="$PS1"'\[\033[0m\]'        # reset color
 #http://robertmuth.blogspot.co.uk/2012/08/better-bash-scripting-in-15-minutes.html
 
 alias ll='ls -laFhG'
-alias ls='ls -FG'
+alias ls='ls -aFG'
 alias ..='cd ..'
 alias cd..='cd ..'
 alias gs='git status'
-alias gc='git checkout'
+alias clean_all='dotnet clean; git clean -fdX'
 
 # from http://stackoverflow.com/a/16710084
 # ascii colours http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -254,7 +257,8 @@ alias h='historysearch'
 historicalsearch() {
     if [ $# -ge 1 ]
     then
-        grep -i $1 ${HISTDIR}/*
+#        grep -i $1 ${HISTDIR}/*
+        grep -i $1 ${HISTDIR}/* | cut -d':' -f2 | awk '!seen[$0]++'
     else
         echo "need a param"
     fi
@@ -300,12 +304,19 @@ alias grep="grep --colour=auto "
 alias d="docker"
 alias dps="docker ps"
 alias da="docker attach"
-alias aws_login="`aws ecr get-login --no-include-email`"
+
 
 alias devimg="echo docker run -it --rm --name dev -v $PWD:/usr/src/app -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro -v ~/bundle-cache:/usr/local/bundle -v ~/.bashrc:/root/.bashrc:ro devimg"
 
-alias docker_kill_all="echo docker rm -f \$\(docker ps -aq\)"
-alias docker_prune_volumes="echo docker system prune -f --volumes"
+docker_kill_all() { echo docker kill --signal KILL \$\(docker ps -aq\); docker kill --signal KILL $(docker ps -aq); }
+docker_stop_all() { echo docker stop --time 10 \$\(docker ps -q\); docker stop --time 10 $(docker ps -q); }
+docker_remove_all_containers() { echo docker rm \$\(docker ps -a -q\); docker rm $(docker ps -a -q); }
+docker_remove_all_images() { echo docker rmi \$\(docker images -q\); docker rmi $(docker images -q); }
+docker_prune_all_volumes() { echo docker volume rm \$\(docker volume ls -q  \| grep -v portainer_data\); docker volume rm $(docker volume ls -q  | grep -v portainer_data); }
+#docker_nuke_all() { docker_stop_all; docker_remove_all_containers; docker_remove_all_images; docker_prune_all_volumes; }
+docker_nuke_all() { docker_stop_all; docker_remove_all_containers; docker_prune_all_volumes; }
+
+#alias docker_prune_volumes="echo docker system prune -f --volumes"
 alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer"
 alias plantuml_start="docker run -d -p 8888:8080 plantuml/plantuml-server"
 alias up_and_watch="docker-compose up -d && watch -n 2 docker-compose ps"
@@ -313,13 +324,19 @@ alias seq="docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -p
 alias chrome="/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 alias ss="stty sane"
 
+# port_in_use() {
+#     if [ $# -ge 1 ]
+#     then
+#         lsof -nP -iTCP:\$\1 | grep LISTEN;
+#     else
+#         lsof -nP -iTCP | grep LISTEN;
+#     fi
+# }
+
 command_exists() {
     command -v "$1" &> /dev/null;
 }
 
-#if command_exists aws; then
-    aws_login
-#fi
 
 #if [ -d ~/dev/ ]; then cd ~/dev/; fi
 

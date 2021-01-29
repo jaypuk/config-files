@@ -11,3 +11,7 @@ alias jfrog="grep BUNDLE_SAGEONEGEMS__JFROG__IO ~/.bundle/config"
 source /Users/jayesh.patel/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
 [ -r ~/.creds_do_not_share ] && source ~/.creds_do_not_share
+
+export SBC_NUGET_DEBUG_REPOSITORY_PATH="/Users/jayesh.patel/dev/SBC_NUGET_DEBUG_REPOSITORY"
+
+aws_login
