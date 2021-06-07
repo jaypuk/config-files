@@ -42,8 +42,18 @@
   process = git-lfs filter-process
   required = true
 [core]
-	excludesfile = /Users/jayesh.patel/.gitignore_global
-  pager = "delta --dark"
+	excludesfile = ~/.gitignore_global
+  pager = delta
+
+[delta]
+    line-numbers = true
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Monokai Extended
+    navigate = true
+
+[interactive]
+    diffFilter = delta --color-only
 
 [difftool "diffmerge"]
   cmd = diffmerge "$LOCAL" "$REMOTE"

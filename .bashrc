@@ -121,6 +121,7 @@ alias ..='cd ..'
 alias cd..='cd ..'
 alias gs='git status'
 alias clean_all='dotnet clean; git clean -fdX'
+alias clean_and_build_all='dotnet clean; git clean -fdX;dotnet build'
 
 # from http://stackoverflow.com/a/16710084
 # ascii colours http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -301,9 +302,10 @@ alias grep="grep --colour=auto "
 
 #alias hosts="np /C/Windows/System32/Drivers/etc/hosts"
 
-alias d="docker"
+#alias d="docker"
 alias dps="docker ps"
-alias da="docker attach"
+alias dcps="docker-compose ps"
+#alias da="docker attach"
 
 
 alias devimg="echo docker run -it --rm --name dev -v $PWD:/usr/src/app -v ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro -v ~/bundle-cache:/usr/local/bundle -v ~/.bashrc:/root/.bashrc:ro devimg"
@@ -315,6 +317,7 @@ docker_remove_all_images() { echo docker rmi \$\(docker images -q\); docker rmi 
 docker_prune_all_volumes() { echo docker volume rm \$\(docker volume ls -q  \| grep -v portainer_data\); docker volume rm $(docker volume ls -q  | grep -v portainer_data); }
 #docker_nuke_all() { docker_stop_all; docker_remove_all_containers; docker_remove_all_images; docker_prune_all_volumes; }
 docker_nuke_all() { docker_stop_all; docker_remove_all_containers; docker_prune_all_volumes; }
+alias dna="docker_nuke_all"
 
 #alias docker_prune_volumes="echo docker system prune -f --volumes"
 alias portainer="docker run -d  -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer"

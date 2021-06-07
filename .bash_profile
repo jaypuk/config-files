@@ -14,4 +14,8 @@ source /Users/jayesh.patel/Library/Preferences/org.dystroy.broot/launcher/bash/b
 
 export SBC_NUGET_DEBUG_REPOSITORY_PATH="/Users/jayesh.patel/dev/SBC_NUGET_DEBUG_REPOSITORY"
 
+alias cdorg="pushd ~/dev/sbc.core.organisation.service_git"
+alias cdac="pushd ~/dev/sbc.core.accesscontrol.service_git"
+alias dev="pushd ~/dev"
+
 aws_login
